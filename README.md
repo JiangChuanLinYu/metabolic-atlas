@@ -8,7 +8,7 @@ Serve `dist` with any static HTTP server, for example `python -m http.server 417
 
 ## Interface
 
-- 6 pathway modules, 18 core pathways and 13 extensions.
+- 6 pathway modules, 18 core pathways and 12 extensions.
 - Animal, plant and microbial cell/context selection.
 - Search, collapsible modules, related-pathway navigation.
 - Overview, Connections and Regulation views.
