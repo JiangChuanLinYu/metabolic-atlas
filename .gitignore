@@ -8,3 +8,4 @@ Thumbs.db
 .sites-runtime/
 .sites-checkout/
 .sites-checkout-*/
+tmp/

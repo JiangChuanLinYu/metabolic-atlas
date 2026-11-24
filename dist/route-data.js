@@ -1,0 +1,80 @@
+// Explicit main-substrate transformations from the curated course reactions.
+// Cofactors and co-substrates do not create shortcuts between unrelated pathways.
+const routeEdges=[];
+function routeStep(reaction,from,to,pathway,reversible=false){
+ routeEdges.push({reaction,from,to,pathway});
+ if(reversible)routeEdges.push({reaction,from:to,to:from,pathway});
+}
+const routeRows=[
+ ['hk','Glucose','Glucose 6-phosphate','Glycolysis'],
+ ['pgi','Glucose 6-phosphate','Fructose 6-phosphate','Glycolysis',true],
+ ['pfk','Fructose 6-phosphate','Fructose 1,6-bisphosphate','Glycolysis'],
+ ['fbp','Fructose 1,6-bisphosphate','Fructose 6-phosphate','Gluconeogenesis'],
+ ['ald','Fructose 1,6-bisphosphate','Glyceraldehyde 3-phosphate','Glycolysis',true],
+ ['ald','Fructose 1,6-bisphosphate','Dihydroxyacetone phosphate','Glycolysis',true],
+ ['tpi','Dihydroxyacetone phosphate','Glyceraldehyde 3-phosphate','Glycolysis',true],
+ ['gapdh','Glyceraldehyde 3-phosphate','1,3-Bisphosphoglycerate','Glycolysis',true],
+ ['pgk','1,3-Bisphosphoglycerate','3-Phosphoglycerate','Glycolysis',true],
+ ['pgm','3-Phosphoglycerate','2-Phosphoglycerate','Glycolysis',true],
+ ['eno','2-Phosphoglycerate','Phosphoenolpyruvate','Glycolysis',true],
+ ['pk','Phosphoenolpyruvate','Pyruvate','Glycolysis'],
+ ['pdh','Pyruvate','Acetyl-CoA','Pyruvate Oxidation'],
+ ['cs','Acetyl-CoA','Citrate','Citric Acid Cycle'],
+ ['cs','Oxaloacetate','Citrate','Citric Acid Cycle'],
+ ['aco','Citrate','cis-Aconitate','Citric Acid Cycle',true],
+ ['aco','cis-Aconitate','Isocitrate','Citric Acid Cycle',true],
+ ['idh','Isocitrate','α-Ketoglutarate','Citric Acid Cycle'],
+ ['akg','α-Ketoglutarate','Succinyl-CoA','Citric Acid Cycle'],
+ ['scs','Succinyl-CoA','Succinate','Citric Acid Cycle',true],
+ ['sdh','Succinate','Fumarate','Citric Acid Cycle',true],
+ ['fum','Fumarate','L-Malate','Citric Acid Cycle',true],
+ ['mdh','L-Malate','Oxaloacetate','Citric Acid Cycle',true],
+ ['g6pd','Glucose 6-phosphate','6-Phosphogluconolactone','Pentose Phosphate Pathway'],
+ ['lactonase','6-Phosphogluconolactone','6-Phosphogluconate','Pentose Phosphate Pathway'],
+ ['6pgd','6-Phosphogluconate','Ribulose 5-phosphate','Pentose Phosphate Pathway'],
+ ['rpi','Ribulose 5-phosphate','Ribose 5-phosphate','Pentose Phosphate Pathway',true],
+ ['glyp','Glycogen','Glucose 1-phosphate','Glycogen Metabolism'],
+ ['pgmut','Glucose 1-phosphate','Glucose 6-phosphate','Glycogen Metabolism',true],
+ ['cpt1','Fatty acyl-CoA','Acylcarnitine','Fatty Acid β-Oxidation'],
+ ['ldh','Pyruvate','L-Lactate','Glycolysis',true],
+ ['alt','Alanine','Pyruvate','Amino Acid Catabolism',true],
+ ['alt','α-Ketoglutarate','Glutamate','Amino Acid Catabolism',true],
+ ['pc','Pyruvate','Oxaloacetate','Anaplerotic Reactions'],
+ ['gd h','Glutamate','α-Ketoglutarate','Amino Acid Catabolism',true],
+ ['glutaminase','Glutamine','Glutamate','Amino Acid Catabolism'],
+ ['otc','Ornithine','Citrulline','Urea Cycle'],
+ ['otc','Carbamoyl phosphate','Citrulline','Urea Cycle'],
+ ['ass','Citrulline','Argininosuccinate','Urea Cycle'],
+ ['ass','Aspartate','Argininosuccinate','Urea Cycle'],
+ ['asl','Argininosuccinate','Arginine','Urea Cycle'],
+ ['asl','Argininosuccinate','Fumarate','Urea Cycle'],
+ ['arginase','Arginine','Ornithine','Urea Cycle'],
+ ['arginase','Arginine','Urea','Urea Cycle'],
+ ['cyt-mdh','L-Malate','Oxaloacetate','Urea Cycle',true],
+ ['ast','Oxaloacetate','Aspartate','Amino Acid Catabolism',true],
+ ['ast','Glutamate','α-Ketoglutarate','Amino Acid Catabolism',true],
+ ['acc','Acetyl-CoA','Malonyl-CoA','Fatty Acid Biosynthesis'],
+ ['hmg','HMG-CoA','Mevalonate','Cholesterol Metabolism']
+];
+routeRows.forEach(row=>routeStep(...row));
+const compoundAliases={
+ 'Glucose':['Glc'], 'Glucose 6-phosphate':['G6P'], 'Fructose 6-phosphate':['F6P'],
+ 'Fructose 1,6-bisphosphate':['F1,6BP','F16BP','FBP'],
+ 'Fructose 2,6-bisphosphate':['F2,6BP','F26BP'],
+ 'Glyceraldehyde 3-phosphate':['GAP','GA3P','G3P'], 'Glycerol 3-phosphate':['G3P','Gro3P'],
+ 'Dihydroxyacetone phosphate':['DHAP'], '1,3-Bisphosphoglycerate':['1,3BPG','13BPG'],
+ '3-Phosphoglycerate':['3PG','3-PG'], '2-Phosphoglycerate':['2PG','2-PG'],
+ 'Phosphoenolpyruvate':['PEP'], 'Pyruvate':['Pyr'], 'Acetyl-CoA':['AcCoA'],
+ 'Oxaloacetate':['OAA'], 'L-Malate':['Mal','Malate'], 'Fumarate':['Fum'],
+ 'Succinate':['Succ'], 'Citrate':['Cit'], 'Isocitrate':['Icit'],
+ 'α-Ketoglutarate':['AKG','aKG','alpha-ketoglutarate','2OG'],
+ 'Succinyl-CoA':['SucCoA'], 'Glucose 1-phosphate':['G1P'],
+ 'Ribulose 5-phosphate':['Ru5P'], 'Ribose 5-phosphate':['R5P'],
+ '6-Phosphogluconate':['6PG'], 'L-Lactate':['Lac','Lactate'],
+ 'Glutamate':['Glu'], 'Glutamine':['Gln'], 'Alanine':['Ala'],
+ 'Aspartate':['Asp'], 'Arginine':['Arg'], 'Ornithine':['Orn'],
+ 'Citrulline':['Citru'], 'Argininosuccinate':['ArgSucc'],
+ 'Ethanol':['EtOH'], 'Acetaldehyde':['AcH'], 'Acetoacetate':['AcAc'],
+ 'D-β-Hydroxybutyrate':['BHB'], 'Carbamoyl phosphate':['CP']
+};
+const enzymeAliases={hk:['HK','GK'],pgi:['PGI','GPI'],pfk:['PFK','PFK-1','PFK1'],fbp:['FBPase','FBPase-1'],ald:['ALDO'],tpi:['TPI','TIM'],gapdh:['GAPDH'],pgk:['PGK'],pgm:['PGM'],eno:['ENO'],pk:['PK'],pdh:['PDH','PDC'],cs:['CS'],aco:['ACO'],idh:['IDH'],akg:['OGDH','α-KGDH'],scs:['SCS'],sdh:['SDH'],fum:['Fumarase'],mdh:['MDH'],'cyt-mdh':['MDH'],g6pd:['G6PD'],lactonase:['PGL'], '6pgd':['6PGD'],rpi:['RPI'],glyp:['GP'],pgmut:['PGM'],cpt1:['CPT1'],ldh:['LDH'],alt:['ALT','GPT'],pc:['PC'],'gd h':['GDH'],cps1:['CPS1','CPS-I'],acc:['ACC'],otc:['OTC'],ass:['ASS','ASS1'],asl:['ASL'],arginase:['ARG1'],ast:['AST','GOT'],glutaminase:['GLS'],hmg:['HMGCR']};
