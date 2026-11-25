@@ -1,6 +1,6 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');
 const fs=require('node:fs');const vm=require('node:vm');
-const c=vm.createContext({});for(const f of ['course-data.js','map-update.js','course-slides.js','atlas-data.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),c);
+const c=vm.createContext({});for(const f of ['atlas-data.js','course-data.js','map-update.js','course-slides.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),c);
 const {reactions,metabolites,slides,objects}=vm.runInContext('({reactions:courseReactions,metabolites:courseMetabolites,slides:courseSlides,objects:atlasData.objects})',c);
 test('all 786 course slides and every curated citation resolve locally',()=>{
  assert.equal(slides.length,786);const refs=new Set([...slides.map(s=>s.chapter+':'+s.slide),'Atlas:1']);

@@ -84,3 +84,5 @@ git push origin main
 推送后，在 https://github.com/JiangChuanLinYu/metabolic-atlas/actions 查看发布进度。绿色成功标记表示发布完成；同学刷新原来的网址即可。仅在本地保存文件不会更新在线页面。测试或部署失败时，上次成功发布的网站继续保留。
 
 发布范围仅为 `dist`；本地临时文件 `tmp` 不进入仓库。未来添加网页文件时请使用相对资源路径，以兼容 `/metabolic-atlas/` 子路径。
+
+Diagram semantics: 13 reviewed repeated-metabolite or cross-region schematic links are recorded separately in `scripts/atlas-memberships.json` (`referenceLinks`). They retain their source positions as muted visual references, have no pathway membership, and are excluded from reaction/molecule bindings and pointer interaction. Source shape 828 is the methylmalonyl-CoA to succinyl-CoA arrow, not ketogenesis. These classifications must be re-reviewed when source shape IDs change.

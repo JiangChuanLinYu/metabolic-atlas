@@ -23,6 +23,7 @@ for(const o of data.objects){
  }else if(translate){o.x=-Number(translate[1])*.75;o.y=-Number(translate[2])*.75;o.width=Number(size[1])*.75;o.height=Number(size[2])*.75;}
  o.background=o.id===mapping.backgroundId;
  o.decorative=o.id===266;
+ o.referenceLink=mapping.referenceLinks?.[o.id]||null;
  // Office wraps this raster background in enormous clip rectangles and nested
  // transforms. Render the embedded original directly to avoid SVG clipping
  // differences between browsers and zoom levels; retain the source bounds.

@@ -81,7 +81,7 @@ test('updated core map classifies every added object and keeps the cell backgrou
  const addedIds=[31,5,16,19,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,49,51,52,53,54,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,77,78,79,80,81,82,83,84,85,86,88,89,90,91,92,93,94,95,96,97,98,99,100,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,119,120,121,122,124];
  const added=addedIds.map(id=>data.objects.find(o=>o.id===id));
  assert.equal(added.length,88);
- for(const o of added)assert.ok(o.pathways.length,'unmapped new shape '+o.id);
+ for(const o of added)assert.ok(o.referenceLink||o.pathways.length,'unmapped new shape '+o.id);
  assert.deepEqual(Array.from(data.objects.filter(o=>o.background).map(o=>o.id)),[2]);
  assert.equal(data.objects.find(o=>o.id===2).pathways.length,0);
  for(const id of [16,19])assert.ok(!data.objects.find(o=>o.id===id).pathways.includes('Glucose–Alanine Cycle'));

@@ -101,9 +101,7 @@
       "Amino Acid Catabolism",
       "Nitrogen Transport"
     ],
-    "29": [
-      "Amino Acid Catabolism"
-    ],
+    "29": [],
     "30": [
       "Fatty Acid Biosynthesis"
     ],
@@ -362,10 +360,7 @@
       "Urea Cycle",
       "NADH Shuttles"
     ],
-    "105": [
-      "Urea Cycle",
-      "NADH Shuttles"
-    ],
+    "105": [],
     "106": [
       "Urea Cycle",
       "NADH Shuttles"
@@ -458,10 +453,7 @@
       "NADH Shuttles",
       "Amino Acid Catabolism"
     ],
-    "130": [
-      "NADH Shuttles",
-      "Amino Acid Catabolism"
-    ],
+    "130": [],
     "131": [
       "NADH Shuttles",
       "Amino Acid Catabolism"
@@ -749,9 +741,7 @@
     "216": [
       "Oxidative Phosphorylation"
     ],
-    "217": [
-      "Oxidative Phosphorylation"
-    ],
+    "217": [],
     "218": [
       "Fatty Acid Biosynthesis"
     ],
@@ -870,9 +860,7 @@
     "254": [
       "Oxidative Phosphorylation"
     ],
-    "255": [
-      "Gluconeogenesis"
-    ],
+    "255": [],
     "256": [
       "Gluconeogenesis"
     ],
@@ -925,9 +913,7 @@
     "274": [
       "Glycogen Metabolism"
     ],
-    "275": [
-      "Glycogen Metabolism"
-    ],
+    "275": [],
     "276": [
       "Fatty Acid Biosynthesis"
     ],
@@ -1348,12 +1334,8 @@
     "415": [
       "Fatty Acid Biosynthesis"
     ],
-    "416": [
-      "Fatty Acid Biosynthesis"
-    ],
-    "417": [
-      "Fatty Acid Biosynthesis"
-    ],
+    "416": [],
+    "417": [],
     "418": [
       "Deoxyribonucleotide Biosynthesis"
     ],
@@ -1405,9 +1387,7 @@
     "434": [
       "Fatty Acid Biosynthesis"
     ],
-    "435": [
-      "Fatty Acid Biosynthesis"
-    ],
+    "435": [],
     "436": [
       "Fatty Acid Biosynthesis"
     ],
@@ -1420,10 +1400,7 @@
     "439": [
       "Fatty Acid Biosynthesis"
     ],
-    "440": [
-      "Triacylglycerol Metabolism",
-      "Glycerophospholipid Biosynthesis"
-    ],
+    "440": [],
     "441": [
       "Triacylglycerol Metabolism",
       "Glycerophospholipid Biosynthesis"
@@ -1517,9 +1494,7 @@
       "Triacylglycerol Metabolism",
       "Glycerophospholipid Biosynthesis"
     ],
-    "465": [
-      "Cholesterol Metabolism"
-    ],
+    "465": [],
     "466": [
       "Cholesterol Metabolism"
     ],
@@ -2327,9 +2302,7 @@
     "720": [
       "Purine Biosynthesis"
     ],
-    "721": [
-      "Fatty Acid β-Oxidation"
-    ],
+    "721": [],
     "722": [
       "Fatty Acid β-Oxidation"
     ],
@@ -2649,7 +2622,8 @@
       "Purine Biosynthesis"
     ],
     "828": [
-      "Ketone Body Metabolism"
+      "Fatty Acid β-Oxidation",
+      "Anaplerotic Reactions"
     ],
     "829": [
       "Ketone Body Metabolism"
@@ -3358,8 +3332,21 @@
     "1064": [
       "Urea Cycle"
     ],
-    "1065": [
-      "Urea Cycle"
-    ]
+    "1065": []
+  },
+  "referenceLinks": {
+    "29": "Pyruvate",
+    "105": "Malate",
+    "130": "Oxaloacetate / Aspartate schematic connection",
+    "217": "Ubiquinol",
+    "255": "Phosphoenolpyruvate",
+    "275": "Oxaloacetate",
+    "416": "Malate",
+    "417": "Malate",
+    "435": "Oxaloacetate",
+    "440": "Glycerol 3-phosphate",
+    "465": "Acetyl-CoA",
+    "721": "Glycerol",
+    "1065": "Glutamate"
   }
 }

@@ -68,6 +68,7 @@ function showCourseMetabolite(name){
  edges.forEach(({r,e})=>{body.append(courseButton(`${name} — ${regulationLabel(e.type)} → ${r.name}`,()=>showCourseReaction(r.id)),courseNode('p',e.context));});
 }
 function inspectAtlasObject(item){
+ if(item.referenceLink)return;
  if(typeof mapCompoundGroups!=='undefined'&&mapCompoundGroups[item.id]){
   const body=openCourse('选择物质');
   mapCompoundGroups[item.id].forEach(name=>body.append(courseButton(name,()=>showCourseMetabolite(name))));return;

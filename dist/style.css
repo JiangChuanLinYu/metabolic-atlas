@@ -18,3 +18,5 @@
 .atlas-decoration{filter:none;opacity:1;pointer-events:none}
 
 #atlas-select-all[aria-pressed="true"]{background:#dcebe2;font-weight:600}
+/* Repeated-label connectors are visual references, never reaction hit targets. */
+.atlas-reference-link{pointer-events:none}

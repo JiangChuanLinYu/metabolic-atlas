@@ -1,6 +1,6 @@
 
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const c=vm.createContext({});for(const f of ['course-data.js','map-update.js','route-data.js','route-update.js','availability.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),c);
+const c=vm.createContext({});for(const f of ['atlas-data.js','course-data.js','map-update.js','route-data.js','route-update.js','availability.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),c);
 vm.runInContext(fs.readFileSync('dist/route-search.js','utf8').replace(/initRouteSearch\(\);\s*$/,''),c);
 const run=code=>vm.runInContext(code,c);
 test('aliases resolve enzymes and compounds without silently resolving ambiguity',()=>{

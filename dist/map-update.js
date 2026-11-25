@@ -147,3 +147,11 @@ for(const m of Object.values(courseMetabolites))if(!m.structure&&!m.reference){
  const reaction=courseReactions.find(r=>r.metabolites.includes(m.name)&&r.source[0]!=='Atlas');
  if(reaction)m.reference=reaction.source;
 }
+// The long dashed links join repeated labels in the source drawing; they are
+// not enzyme reactions and must never supply clickable reaction objects.
+const referenceLinkIds=new Set(atlasData.objects.filter(o=>o.referenceLink).map(o=>o.id));
+for(const r of courseReactions)r.objects=r.objects.filter(id=>!referenceLinkIds.has(id));
+for(const m of Object.values(courseMetabolites))m.ids=m.ids.filter(id=>!referenceLinkIds.has(id));
+// Shape 828 belongs to the methylmalonyl-CoA -> succinyl-CoA branch,
+// not the nearby ketone-body synthesis branch.
+courseReactions.find(r=>r.id==='ketone').objects=courseReactions.find(r=>r.id==='ketone').objects.filter(id=>id!==828);

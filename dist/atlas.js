@@ -46,12 +46,13 @@ function renderAtlas(){
  if(!atlasReady){
   host.style.aspectRatio=`${atlasData.width} / ${atlasData.height}`;
   for(const item of atlasData.objects){
-   const el=document.createElement(item.background||item.decorative?'div':'button');
+   const el=document.createElement(item.background||item.decorative||item.referenceLink?'div':'button');
    el.className='atlas-object'+(item.background?' atlas-background':item.decorative?' atlas-decoration':'');
    el.dataset.id=item.id;
+   if(item.referenceLink){el.classList.add('atlas-reference-link');el.setAttribute('aria-hidden','true');}
    Object.assign(el.style,{left:100*item.x/atlasData.width+'%',top:100*item.y/atlasData.height+'%',width:100*item.width/atlasData.width+'%',height:100*item.height/atlasData.height+'%'});
    const img=document.createElement('img');img.src=item.asset+(item.assetVersion?'?v='+item.assetVersion:'');img.alt='';img.draggable=false;el.append(img);
-   if(!item.background&&!item.decorative){
+   if(!item.background&&!item.decorative&&!item.referenceLink){
     el.title=(item.text||'Diagram object')+' — '+item.pathways.join(' / ');
     el.setAttribute('aria-label',el.title);
     el.onclick=event=>inspectAtlasClick(item,event);
@@ -69,7 +70,7 @@ function renderAtlas(){
   const el=host.querySelector(`[data-id="${item.id}"]`);
   const on=item.pathways.some(p=>atlasSelection.has(p));
   el.classList.toggle('highlighted',on);
-  if(!item.background&&!item.decorative){
+  if(!item.background&&!item.decorative&&!item.referenceLink){
    const eligible=item.pathways.some(available);
    const status=on?'已高亮':eligible?'尚未选择所属通路':'当前细胞展示规则下不可选';
    el.title=(item.text||'图形对象')+' — '+item.pathways.join(' / ')+' — '+status;
