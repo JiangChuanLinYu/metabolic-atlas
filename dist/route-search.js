@@ -27,8 +27,10 @@ function routeObjectIds(routes){
  }
  return [...ids];
 }
+function clearRouteResults(){document.querySelectorAll('.query-result').forEach(el=>el.classList.remove('query-result'));}
 function highlightRoutes(routes){
- const ids=routeObjectIds(routes);markCourseReaction(ids);
+ const ids=routeObjectIds(routes);clearRouteResults();
+ ids.forEach(id=>document.querySelector('#atlas-map [data-id="'+id+'"]')?.classList.add('query-result'));
  if(!ids.length)return;
  const chosen=new Set(ids),objects=atlasData.objects.filter(o=>chosen.has(o.id));
  const left=Math.min(...objects.map(o=>o.x)),top=Math.min(...objects.map(o=>o.y));
@@ -41,7 +43,7 @@ function highlightRoutes(routes){
 }
 function submitRouteQuery(value,target=''){
  const result=document.getElementById('route-results');result.replaceChildren();result.hidden=false;
- clearReactionMark();
+ clearRouteResults();
  const parts=target.trim()?[value.trim(),target.trim()]:[value.trim()];
  if(!value.trim()||parts.length>2||parts.some(p=>!p.trim())){result.append(courseNode('p','请先填写物质或酶；查找路径时，再填写目标物质。'));return;}
  const choose=(index,selected)=>{
@@ -61,7 +63,7 @@ function submitRouteQuery(value,target=''){
   if(!routes.length){result.append(courseNode('p',truncated?'搜索达到上限，尚未找到结果，请缩小起点和终点范围。':'当前细胞的已收录反应中未找到连接，不代表生物学上不存在。'));return;}
   result.append(courseNode('p','按底物和产物连接查询，不把 ATP、NADH 等辅因子当作捷径；结果不表示这些反应能同时运行。'));
   highlightRoutes(routes);
-  result.append(courseButton('显示全部结果',()=>highlightRoutes(routes)),courseButton('清除查询',()=>{clearReactionMark();result.replaceChildren();result.hidden=true;}));
+  result.append(courseButton('显示全部结果',()=>highlightRoutes(routes)),courseButton('清除查询',()=>{clearRouteResults();result.replaceChildren();result.hidden=true;}));
   for(const [i,route] of routes.entries()){
    const section=courseNode('details');section.append(courseNode('summary',(i+1)+'. '+route.length+' 条反应记录'));
    section.append(courseNode('p',[a.name,...route.map(e=>e.to)].join(' → ')));
@@ -88,5 +90,5 @@ function initRouteSearch(){
  document.getElementById('cell').addEventListener('input',resetRouteSearch);
  document.getElementById('groups').addEventListener('click',resetRouteSearch);
 }
-function resetRouteSearch(){clearReactionMark();const result=document.getElementById('route-results');result.replaceChildren();result.hidden=true;}
+function resetRouteSearch(){clearRouteResults();const result=document.getElementById('route-results');result.replaceChildren();result.hidden=true;}
 initRouteSearch();

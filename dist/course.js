@@ -10,17 +10,6 @@ function courseSource(ref,parent,expanded=false){
  parent.append(section);
 }
 function courseButton(text,handler){const b=courseNode('button',text);b.onclick=handler;return b;}
-function clearReactionMark(){
- document.querySelectorAll('.reaction-focus').forEach(el=>el.classList.remove('reaction-focus'));
- document.getElementById('reaction-clear').hidden=true;
-}
-function markCourseReaction(ids){
- clearReactionMark();
- let marked=false;
- ids.forEach(id=>{const el=document.querySelector(`#atlas-map [data-id="${id}"]`);if(el){el.classList.add('reaction-focus');marked=true;}});
- document.getElementById('reaction-clear').hidden=!marked;
- document.getElementById('course-dialog').close();
-}
 const courseHistory=[];
 function updateCourseBack(){
  const back=document.getElementById('course-back');
@@ -61,9 +50,7 @@ function showCourseReaction(id){
  body.append(courseNode('h3',r.source[0]==='Atlas'?'反应示意图':'反应结构式'));courseSource(r.source,body,true);
  const linked=courseReactions.filter(other=>other.id!==id&&other.regulation.some(e=>r.metabolites.includes(e.m)));
  if(linked.length){body.append(courseNode('h3','这些反应物／产物还参与调控'));linked.forEach(other=>body.append(courseButton(other.name,()=>showCourseReaction(other.id))));}
- const ids=r.objects;
- if(ids.length)body.append(courseButton('在总图中标记该反应',()=>markCourseReaction(ids)));
- else body.append(courseNode('p','总图中暂未绘制此反应。'));
+ if(!r.objects.length)body.append(courseNode('p','总图中暂未绘制此反应。'));
 }
 function showCourseMetabolite(name){
  const m=courseMetabolites[name];const body=openCourse(name);
@@ -110,5 +97,4 @@ function inspectAtlasClick(item,event){
 }
 document.getElementById('course-close').onclick=()=>document.getElementById('course-dialog').close();
 document.getElementById('course-back').onclick=backCourse;
-document.getElementById('reaction-clear').onclick=clearReactionMark;
 document.getElementById('course-dialog').addEventListener('close',()=>{courseHistory.length=0;});
